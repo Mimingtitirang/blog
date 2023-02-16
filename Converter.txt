@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>CET to KST Converter</h1>
+
+<p>Enter a CET time (24-hour format) to convert to KST:</p>
+
+<input type="text" id="cetTime">
+
+<button onclick="convertTime()">Convert</button>
+
+<p id="kstTime"></p>
+
+<script>
+function convertTime() {
+  var cetTime = document.getElementById("cetTime").value;
+  var cetDate = new Date();
+  var cetSplit = cetTime.split(":");
+  cetDate.setUTCHours(cetSplit[0]);
+  cetDate.setUTCMinutes(cetSplit[1]);
+  cetDate.setUTCSeconds(0);
+  cetDate.setUTCMilliseconds(0);
+  cetDate.setUTCHours(cetDate.getUTCHours() + 1);
+  var kstDate = new Date(cetDate.getTime() + 8 * 3600 * 1000);
+  var kstTime = kstDate.getUTCHours() + ":" + kstDate.getUTCMinutes();
+  document.getElementById("kstTime").innerHTML = "KST Time: " + kstTime;
+}
+</script>
+
+</body>
+</html>
